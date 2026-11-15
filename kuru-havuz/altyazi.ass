@@ -1,0 +1,44 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 2
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Alt,Inter,76,&H00FFFFFF,&H00FFFFFF,&H00000000,&H64000000,1,0,0,0,100,100,0,0,1,5,2,2,90,90,640,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.28,0:00:02.51,Alt,,0,0,0,,{\fad(80,0)}Denizin hemen yanına\Nkocaman bir çukur
+Dialogue: 0,0:00:02.51,0:00:04.97,Alt,,0,0,0,,{\fad(80,0)}kazarsan, içine bir gemi\Npark edebilirsin.
+Dialogue: 0,0:00:05.22,0:00:05.85,Alt,,0,0,0,,{\fad(80,0)}Neden mi?
+Dialogue: 0,0:00:05.85,0:00:08.23,Alt,,0,0,0,,{\fad(80,0)}Geminin altı midyeyle\Nkaplanmış ve bunu su
+Dialogue: 0,0:00:08.23,0:00:09.59,Alt,,0,0,0,,{\fad(80,0)}altında temizleyemezsin.
+Dialogue: 0,0:00:09.62,0:00:12.30,Alt,,0,0,0,,{\fad(80,0)}O yüzden kıyıya dev bir\Nhavuz kazıp denize açılan
+Dialogue: 0,0:00:12.30,0:00:13.29,Alt,,0,0,0,,{\fad(80,0)}bir kapı yaparsın.
+Dialogue: 0,0:00:13.29,0:00:16.40,Alt,,0,0,0,,{\fad(80,0)}Kapıyı açınca deniz içeri\Ndolar, gemi de süzülerek
+Dialogue: 0,0:00:16.40,0:00:16.77,Alt,,0,0,0,,{\fad(80,0)}girer.
+Dialogue: 0,0:00:16.82,0:00:19.67,Alt,,0,0,0,,{\fad(80,0)}Sonra kapıyı kapatır, suyu\Ndışarı pompalarsın.
+Dialogue: 0,0:00:19.69,0:00:21.72,Alt,,0,0,0,,{\fad(80,0)}Ama su çekildikçe gemi yan\Nyatar.
+Dialogue: 0,0:00:21.72,0:00:24.26,Alt,,0,0,0,,{\fad(80,0)}Bu yüzden gemi gelmeden\Nönce, zemine, geminin
+Dialogue: 0,0:00:24.26,0:00:26.86,Alt,,0,0,0,,{\fad(80,0)}karnına göre kesilmiş\Ntakoz sıraları dizersin.
+Dialogue: 0,0:00:26.86,0:00:29.51,Alt,,0,0,0,,{\fad(80,0)}Gemi bunların üstüne\Noturur, yanlarına da uzun
+Dialogue: 0,0:00:29.51,0:00:30.61,Alt,,0,0,0,,{\fad(80,0)}destekler çakarsın.
+Dialogue: 0,0:00:30.64,0:00:32.57,Alt,,0,0,0,,{\fad(80,0)}Bunlara omurga takozu\Ndenir.
+Dialogue: 0,0:00:32.63,0:00:35.29,Alt,,0,0,0,,{\fad(80,0)}Kuru havuzdaki gemilerin\Nküçük blokların üstünde
+Dialogue: 0,0:00:35.29,0:00:36.45,Alt,,0,0,0,,{\fad(80,0)}durmasının sebebi bu.
+Dialogue: 0,0:00:36.71,0:00:39.06,Alt,,0,0,0,,{\fad(80,0)}Ama deniz, kapının\Nkenarlarından sızar.
+Dialogue: 0,0:00:39.32,0:00:40.74,Alt,,0,0,0,,{\fad(80,0)}Çözüm: yüzen bir kapı.
+Dialogue: 0,0:00:40.74,0:00:43.62,Alt,,0,0,0,,{\fad(80,0)}Tankları suyla dolar ve\Nduvardaki yuvasına batar.
+Dialogue: 0,0:00:43.62,0:00:45.82,Alt,,0,0,0,,{\fad(80,0)}Havuz boşken deniz,\Nzeminden çok daha
+Dialogue: 0,0:00:45.82,0:00:46.53,Alt,,0,0,0,,{\fad(80,0)}yüksektedir.
+Dialogue: 0,0:00:46.53,0:00:49.65,Alt,,0,0,0,,{\fad(80,0)}Deniz kapıyı yuvasına\Nbastırır; ne kadar iterse
+Dialogue: 0,0:00:49.65,0:00:51.37,Alt,,0,0,0,,{\fad(80,0)}kapı o kadar sıkı kapanır.
+Dialogue: 0,0:00:51.69,0:00:54.63,Alt,,0,0,0,,{\fad(80,0)}Derken bir gün zemini\Nçatlaklar sarar ve zemin
+Dialogue: 0,0:00:54.63,0:00:55.71,Alt,,0,0,0,,{\fad(80,0)}kabarmaya başlar.
+Dialogue: 0,0:00:55.71,0:00:58.80,Alt,,0,0,0,,{\fad(80,0)}Yerin altındaki su yukarı\Niter, sanki bütün havuzu
+Dialogue: 0,0:00:58.80,0:00:59.79,Alt,,0,0,0,,{\fad(80,0)}yüzdürmek ister.
+Dialogue: 0,0:00:59.79,0:01:02.40,Alt,,0,0,0,,{\fad(80,0)}Sen de beş metreden kalın\Nyeni bir beton zemin
+Dialogue: 0,0:01:02.40,0:01:02.91,Alt,,0,0,0,,{\fad(80,0)}dökersin.
+Dialogue: 0,0:01:03.21,0:01:05.47,Alt,,0,0,0,,{\fad(80,0)}Tebrikler, artık bir kuru\Nhavuzun var.
