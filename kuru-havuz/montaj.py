@@ -18,6 +18,8 @@ VOICE = os.path.join(HERE, "seslendirme_erdem.mp3")
 END = 66.5  # son cümleden sonra ~1.3 s nefes payı
 
 # Üretim birimleri: ses aralığına göre
+UNITS_V2V = [("V1", 0.0, 9.6), ("V2", 9.6, 16.7), ("V3", 16.7, 21.6), ("V4", 21.6, 30.5), ("V5", 30.5, 39.2),
+             ("V6", 39.2, 43.5), ("V7", 43.5, 51.4), ("V8", 51.4, 59.7), ("V9", 59.7, END)]  # 3D render -> videodan videoya
 UNITS = [("G1", 0.0, 9.6), ("G2", 9.6, 16.7), ("G3", 16.7, 21.6), ("G4", 21.6, 26.8), ("G5a", 26.8, 32.5),
          ("G5b", 32.5, 38.9), ("G6", 38.9, 51.4), ("G7", 51.4, 59.7), ("G8", 59.7, END)]
 
@@ -114,6 +116,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--clips", default=os.path.join(HERE, "klipler"))
     ap.add_argument("--placeholder", action="store_true", help="eksik klipleri test görüntüsüyle doldur")
+    ap.add_argument("--v2v", action="store_true", help="V1..V9 (videodan videoya) parçalarını birleştir; eksik parça 3D render'dan alınır")
     ap.add_argument("--tek", help="zaten seslendirme zamanına göre üretilmiş tek parça video (ör. 3D render)")
     ap.add_argument("-o", "--out", default=os.path.join(HERE, "kuru_havuz_tr.mp4"))
     a = ap.parse_args()
@@ -121,8 +124,13 @@ def main():
     ass = write_subs()
     tmp = tempfile.mkdtemp(prefix="montaj_")
     parts = []
-    for name, s, e in ([] if a.tek else UNITS):
+    units = [] if a.tek else (UNITS_V2V if a.v2v else UNITS)
+    for name, s, e in units:
         out = os.path.join(tmp, f"{name}.mp4")
+        if a.v2v and not any(os.path.exists(os.path.join(a.clips, f"{name}{x}")) for x in (".mp4", ".mov", ".webm")):
+            run(["ffmpeg", "-y", "-v", "error", "-ss", f"{s}", "-to", f"{e}", "-i", os.path.join(HERE, "klipler", "3d_ham.mp4"),
+                 "-an", "-c:v", "libx264", "-preset", "veryfast", "-crf", "18", "-pix_fmt", "yuv420p", out])
+            print(f"{name}: (3D render'dan) {e - s:.2f}s"); parts.append(out); continue
         src = next((os.path.join(a.clips, f"{name}{ext}") for ext in (".mp4", ".mov", ".webm")
                     if os.path.exists(os.path.join(a.clips, f"{name}{ext}"))), None)
         if src:
