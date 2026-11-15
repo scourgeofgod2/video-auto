@@ -114,13 +114,14 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--clips", default=os.path.join(HERE, "klipler"))
     ap.add_argument("--placeholder", action="store_true", help="eksik klipleri test görüntüsüyle doldur")
+    ap.add_argument("--tek", help="zaten seslendirme zamanına göre üretilmiş tek parça video (ör. 3D render)")
     ap.add_argument("-o", "--out", default=os.path.join(HERE, "kuru_havuz_tr.mp4"))
     a = ap.parse_args()
 
     ass = write_subs()
     tmp = tempfile.mkdtemp(prefix="montaj_")
     parts = []
-    for name, s, e in UNITS:
+    for name, s, e in ([] if a.tek else UNITS):
         out = os.path.join(tmp, f"{name}.mp4")
         src = next((os.path.join(a.clips, f"{name}{ext}") for ext in (".mp4", ".mov", ".webm")
                     if os.path.exists(os.path.join(a.clips, f"{name}{ext}"))), None)
@@ -132,11 +133,14 @@ def main():
             sys.exit(f"{name} klibi yok: {a.clips}/{name}.mp4  (test için --placeholder)")
         parts.append(out)
 
-    lst = os.path.join(tmp, "list.txt")
-    with open(lst, "w") as f:
-        f.writelines(f"file '{p}'\n" for p in parts)
-    vid = os.path.join(tmp, "video.mp4")
-    run(["ffmpeg", "-y", "-v", "error", "-f", "concat", "-safe", "0", "-i", lst, "-c", "copy", vid])
+    if a.tek:
+        vid = a.tek
+    else:
+        lst = os.path.join(tmp, "list.txt")
+        with open(lst, "w") as f:
+            f.writelines(f"file '{p}'\n" for p in parts)
+        vid = os.path.join(tmp, "video.mp4")
+        run(["ffmpeg", "-y", "-v", "error", "-f", "concat", "-safe", "0", "-i", lst, "-c", "copy", vid])
     run(["ffmpeg", "-y", "-v", "error", "-i", vid, "-i", VOICE,
          "-filter_complex", f"[0:v]ass={ass}[v];[1:a]apad=whole_dur={END}[a]",
          "-map", "[v]", "-map", "[a]", "-t", f"{END}",

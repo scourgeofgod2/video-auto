@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Kuru Havuz 3D</title>
+<style>html,body{margin:0;background:#000;overflow:hidden}canvas{display:block}</style>
+<script type="importmap">
+{"imports":{"three":"/node_modules/three/build/three.module.js","three/addons/":"/node_modules/three/examples/jsm/"}}
+</script>
+</head>
+<body>
+<script type="module">
+import * as THREE from 'three';
+import { createWorld } from './world.js';
+
+const q = new URLSearchParams(location.search);
+const scale = parseFloat(q.get('scale') || '1');
+const W = Math.round(1080 * scale), H = Math.round(1920 * scale);
+
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(1);
+renderer.setSize(W, H);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 0.78;
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+document.body.appendChild(renderer.domElement);
+
+const world = createWorld(renderer, W / H);
+
+window.renderAt = (t) => {
+  world.update(t);
+  renderer.render(world.scene, world.camera);
+  return true;
+};
+window.grab = (quality = 0.92) => renderer.domElement.toDataURL('image/jpeg', quality);
+window.DURATION = world.duration;
+window.world = world;
+window.ready = true;
+
+if (!q.has('headless')) {
+  // interactive preview: play in real time
+  const t0 = performance.now(), start = parseFloat(q.get('t') || '0');
+  const loop = () => { window.renderAt(start + (performance.now() - t0) / 1000); requestAnimationFrame(loop); };
+  loop();
+}
+</script>
+</body>
+</html>
