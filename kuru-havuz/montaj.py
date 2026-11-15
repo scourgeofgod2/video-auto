@@ -2,7 +2,7 @@
 """Kuru Havuz (TR) montajı.
 
 Kullanım:
-  python3 montaj.py --clips klipler/            # P1.mp4 ... P4.mp4
+  python3 montaj.py --clips klipler/            # G1, G2, G3, G4, G5a, G5b, G6, G7, G8 (.mp4)
   python3 montaj.py --placeholder               # klip yokken düzeni test et
 
 Çıktı: kuru_havuz_tr.mp4 (1080x1920, 24 fps), altyazi.ass, altyazi.srt
@@ -18,7 +18,8 @@ VOICE = os.path.join(HERE, "seslendirme_erdem.mp3")
 END = 66.5  # son cümleden sonra ~1.3 s nefes payı
 
 # Üretim birimleri: ses aralığına göre
-UNITS = [("P1", 0.0, 21.6), ("P2", 21.6, 38.9), ("P3", 38.9, 51.4), ("P4", 51.4, END)]
+UNITS = [("G1", 0.0, 9.6), ("G2", 9.6, 16.7), ("G3", 16.7, 21.6), ("G4", 21.6, 26.8), ("G5a", 26.8, 32.5),
+         ("G5b", 32.5, 38.9), ("G6", 38.9, 51.4), ("G7", 51.4, 59.7), ("G8", 59.7, END)]
 
 
 def run(cmd):
