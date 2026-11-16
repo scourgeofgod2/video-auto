@@ -1,0 +1,11 @@
+Gemilerin altı nasıl temizleniyor? Cevabı kuru havuz. Merak eden birine gönder.
+
+Geminin altı midyeyle kaplanınca su altında temizlemek mümkün değil. Çözüm: kıyıya kazılıp suyu boşaltılabilen dev bir havuz, yani kuru havuz.
+
+Ama her çözüm yeni bir sorun çıkarıyor. Su çekilince gemi yan yatıyor, kapıdan deniz sızıyor, yeraltı suyu zemini kabartıyor. Omurga takozları, yüzen kapı ve beş metreden kalın beton bu yüzden var.
+
+Tersanelerde gemi bakımı tam olarak böyle yapılıyor.
+
+Video Claude ile hazırlandı, seslendirme SpeechGenAI.
+
+#kuruhavuz #tersane #gemi #mühendislik #nasılyapılır

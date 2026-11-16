@@ -1,0 +1,11 @@
+BAŞLIK
+Denize çukur kazıp gemi park etmek: Kuru havuz nasıl çalışır?
+
+AÇIKLAMA
+Gemilerin altı midyeyle kaplanınca su altında temizlenemiyor. Çözüm, kıyıya kazılan ve suyu boşaltılabilen dev bir havuz: kuru havuz.
+
+Bu videoda tersanelerdeki kuru havuzun adım adım nasıl yapıldığını görüyorsun: kapı, pompalama, omurga takozları, yüzen kapı (caisson) ve yeraltı suyuna karşı beş metreden kalın beton zemin.
+
+Video Claude ile hazırlandı, seslendirme SpeechGenAI ile yapıldı: https://speechgenai.com
+
+#shorts #kuruhavuz #tersane #gemi #mühendislik
