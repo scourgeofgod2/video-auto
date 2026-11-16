@@ -31,7 +31,7 @@ def main():
     ap.add_argument("video")
     ap.add_argument("-o", "--out", required=True)
     ap.add_argument("--filigran", default="speechgenai.com")
-    ap.add_argument("--etiket", default="Temsili canlandırma", help="boş bırakılırsa eklenmez")
+    ap.add_argument("--etiket", default="", help="boş bırakılırsa eklenmez")
     ap.add_argument("--kart1", default="Bu videoyu Claude hazırladı")
     ap.add_argument("--kart2", default="Sesi: SpeechGenAI")
     a = ap.parse_args()
