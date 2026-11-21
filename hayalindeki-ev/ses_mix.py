@@ -34,24 +34,27 @@ def pop(f=900, d=0.09):
 
 def main():
     Z = json.load(open(os.path.join(HERE, "anim", "zaman.json")))
-    dia = oku(os.path.join(HERE, "ses", "diyalog.wav"))
+    dia = oku(os.path.join(HERE, "ses2", "diyalog.wav"))
     mix = np.zeros(int(Z["sure"] * SR) + SR, dtype=np.float32); mix[:len(dia)] += dia
-    k9 = next(r for r in Z["replikler"] if r["id"] == "k9")
-    cut_b8 = k9["haplar"][1]["t0"] - 0.05
+    R = {r["id"]: r for r in Z["replikler"]}
+    mid = lambda x, y: (R[x]["t1"] + R[y]["t0"]) / 2
+    s6 = (R["k5"]["t1"] + 0.15, R["o6"]["t0"] - 0.05)
+    kesmeler = [mid("k1", "k2"), mid("k2", "k3"), mid("k3", "k4"), mid("k4", "k5"), s6[0], R["o6"]["t0"] - 0.05,
+                R["k7"]["t1"] + 0.12, R["k9"]["haplar"][1]["t0"] - 0.05, R["o10"]["t0"] - 0.1]
     W = whoosh()
-    for t in [4.6, 7.4, 9.5, 12.2, 14.5, 20.45, cut_b8]:
+    for t in kesmeler:
         i = max(0, int((t - 0.25) * SR)); mix[i:i + len(W)] += W[: len(mix) - i]
-    # flaş anında düşük bir 'boom'
     n = int(0.6 * SR); tt = np.arange(n) / SR; boom = np.sin(2 * np.pi * 60 * tt) * np.exp(-tt * 6) * 0.5
-    i = int(21.0 * SR); mix[i:i + n] += boom
+    for t in [(s6[0] + s6[1]) / 2, R["o8"]["t0"] - 0.12]:
+        i = int(t * SR); mix[i:i + n] += boom[: len(mix) - i]
     P = pop()
     for r in Z["replikler"]:
         for h in r["haplar"]:
             if h["metin"].endswith("!") or "küçük" in h["metin"].lower():
                 i = int(h["t0"] * SR); mix[i:i + len(P)] += P
-    i = int(14.45 * SR); mix[i:i + len(P)] += pop(650)  # 6 AY SONRA
+    i = int((s6[0] + 0.05) * SR); mix[i:i + len(P)] += pop(650)  # 6 AY SONRA
     mix = np.clip(mix / max(1, np.max(np.abs(mix)) / 0.95), -1, 1)[: int(Z["sure"] * SR)]
-    with wave.open(os.path.join(HERE, "ses", "mix.wav"), "w") as w:
+    with wave.open(os.path.join(HERE, "ses2", "mix.wav"), "w") as w:
         w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR); w.writeframes((mix * 32767).astype(np.int16).tobytes())
     print("ses/mix.wav", len(mix) / SR)
 

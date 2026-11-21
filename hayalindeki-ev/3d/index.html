@@ -1,0 +1,36 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Hayalindeki Ev 3D</title>
+<style>
+@font-face{font-family:Inter;font-weight:700;src:url(fonts/Inter-Bold.otf)}
+@font-face{font-family:Inter;font-weight:800;src:url(fonts/Inter-ExtraBold.otf)}
+@font-face{font-family:Inter;font-weight:600;src:url(fonts/Inter-SemiBold.otf)}
+html,body{margin:0;background:#000;overflow:hidden}canvas{display:block}
+</style>
+<script type="importmap">{"imports":{"three":"/node_modules/three/build/three.module.js","three/addons/":"/node_modules/three/examples/jsm/"}}</script>
+</head><body>
+<script type="module">
+import * as THREE from 'three';
+const q = new URLSearchParams(location.search);
+const scale = parseFloat(q.get('scale') || '1');
+const W = Math.round(1080 * scale), H = Math.round(1920 * scale);
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(1); renderer.setSize(W, H);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+const ui = document.createElement('canvas'); ui.width = W; ui.height = H; document.body.appendChild(ui);
+const ctx = ui.getContext('2d');
+await Promise.all(['700','800','600'].map(w => document.fonts.load(`${w} 40px Inter`)));
+const mod = await import(q.get('sahne') || './dunya.js');
+const world = await mod.createWorld(renderer, W / H);
+window.renderAt = (t) => {
+  world.update(t);
+  renderer.render(world.scene, world.camera);
+  ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.drawImage(renderer.domElement, 0, 0);
+  ctx.setTransform(scale, 0, 0, scale, 0, 0); world.ui && world.ui(ctx, t);
+  return true;
+};
+window.grab = (qq = 0.92) => ui.toDataURL('image/jpeg', qq);
+window.DURATION = world.duration;
+window.ready = true;
+</script></body></html>
