@@ -1,0 +1,23 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Hayalindeki Ev</title>
+<style>
+@font-face{font-family:Inter;font-weight:700;src:url(fonts/Inter-Bold.otf)}
+@font-face{font-family:Inter;font-weight:800;src:url(fonts/Inter-ExtraBold.otf)}
+@font-face{font-family:Inter;font-weight:600;src:url(fonts/Inter-SemiBold.otf)}
+html,body{margin:0;background:#000;overflow:hidden}canvas{display:block}
+</style></head><body>
+<canvas id="c"></canvas>
+<script type="module">
+const q = new URLSearchParams(location.search);
+const scale = parseFloat(q.get('scale') || '1');
+const cv = document.getElementById('c');
+cv.width = Math.round(1080 * scale); cv.height = Math.round(1920 * scale);
+const ctx = cv.getContext('2d');
+await Promise.all(['700','800','600'].map(w => document.fonts.load(`${w} 40px Inter`)));
+const mod = await import(q.get('sahne') || './sahne.js');
+await mod.init();
+window.renderAt = (t) => { ctx.setTransform(scale, 0, 0, scale, 0, 0); mod.draw(ctx, t); return true; };
+window.grab = (qq = 0.92) => cv.toDataURL('image/jpeg', qq);
+window.DURATION = mod.DURATION;
+window.ready = true;
+</script></body></html>
